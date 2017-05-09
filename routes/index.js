@@ -13,4 +13,13 @@ router.get('/', function (req, res) {
     })
 })
 
+router.get('/user/:id', (req, res) => {
+  const id = req.params.id
+  db.getUserProfile(id, req.app.get('connection'))
+    .then((result) => {
+      console.log(result)
+      res.render('userProfile', result[0])
+    })
+})
+
 module.exports = router
