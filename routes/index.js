@@ -47,6 +47,20 @@ router.post('/', (req, res) => {
     res.redirect('/')
   })
 
+})
+
+router.get('/blogs/:id', (req, res) => {
+  const id = req.params.id
+  db.viewBlogEntry(id, req.app.get('connection'))
+    .then((result) => {
+
+      console.log(result)
+      res.render('blogEntry', result[0])
+
+    })
+
+
+
 
 
 })

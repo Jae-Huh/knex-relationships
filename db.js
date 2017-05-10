@@ -3,7 +3,8 @@ module.exports = {
   getUser: getUser,
   getUsers: getUsers,
   getUserProfile: getUserProfile,
-  createUser: createUser
+  createUser: createUser,
+  viewBlogEntry: viewBlogEntry
 }
 
 function getUsers (connection) {
@@ -31,4 +32,11 @@ function createUser (name, email, picture, url, connection) {
     .insert({profile_picture: picture, url: url, user_id: result[0]})
 
   })
+}
+
+
+function viewBlogEntry (id, connection) {
+  return connection('blogs')
+  .where('id', id)
+
 }
