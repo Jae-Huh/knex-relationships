@@ -1,3 +1,9 @@
 <img src="{{profile_picture}}" alt="{{name}}">
 <h2>{{name}}</h2>
 <p>Website: <a href="{{url}}">{{url}}</a></p>
+<h2>Blog Posts</h2>
+<ul>
+  {{#each blogPosts}}
+  <li><a href="/blogs/{{id}}">{{title}}</a></li>
+  {{/each}}
+</ul>

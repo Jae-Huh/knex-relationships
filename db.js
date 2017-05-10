@@ -17,16 +17,18 @@ function getUser (id, connection) {
 function getUserProfile (id, connection) {
   return connection('users')
     .join('profiles', 'users.id', 'profiles.user_id')
+    .join('blogs', 'users.id', 'blogs.user_id')
     .where('users.id', id)
-    // .select()
+
+
 }
 
 function createUser (name, email, picture, url, connection) {
   return connection('users')
   .insert({name: name, email: email})
   .then((result) => {
-     console.log(result)
      return connection('profiles')
     .insert({profile_picture: picture, url: url, user_id: result[0]})
+
   })
 }

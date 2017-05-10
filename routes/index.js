@@ -17,8 +17,22 @@ router.get('/user/:id', (req, res) => {
   const id = req.params.id
   db.getUserProfile(id, req.app.get('connection'))
     .then((result) => {
+      const newData = {
+        email: result[0].email,
+        user_id: result[0].user_id,
+        profile_picture: result[0].profile_picture,
+        url: result[0].url,
+        blogPosts: []
+      }
+
+      for(let i = 0; i < result.length; i++) {
+        const blogEntry = {title: result[i].title, body: result[i].body, id: result[i].id}
+        newData.blogPosts.push(blogEntry)
+      }
+
       console.log(result)
-      res.render('userProfile', result[0])
+      res.render('userProfile', newData)
+
     })
 })
 
