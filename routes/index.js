@@ -22,4 +22,21 @@ router.get('/user/:id', (req, res) => {
     })
 })
 
+router.post('/', (req, res) => {
+  const name = req.body.user_name
+  const email = req.body.email
+  const picture = req.body.picture
+  const url = req.body.url
+
+  db.createUser(name, email, picture, url, req.app.get('connection'))
+  .then( () => {
+    res.redirect('/')
+  })
+
+
+
+})
+
+
+
 module.exports = router
