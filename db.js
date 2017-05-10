@@ -19,6 +19,7 @@ function getUserProfile (id, connection) {
   return connection('users')
     .join('profiles', 'users.id', 'profiles.user_id')
     .join('blogs', 'users.id', 'blogs.user_id')
+    .join('favourites', 'users.id', 'favourites.user_id')
     .where('users.id', id)
 
 

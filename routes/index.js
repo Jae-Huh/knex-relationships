@@ -22,13 +22,25 @@ router.get('/user/:id', (req, res) => {
         user_id: result[0].user_id,
         profile_picture: result[0].profile_picture,
         url: result[0].url,
-        blogPosts: []
+        blogPosts: [],
+        favourites: []
       }
 
       for(let i = 0; i < result.length; i++) {
         const blogEntry = {title: result[i].title, body: result[i].body, id: result[i].id}
         newData.blogPosts.push(blogEntry)
       }
+
+      for(let i = 0; i < result.length; i++) {
+
+        const favourite = {favourite_id: result[i].favourite_id}
+
+         if(newData.favourites.indexOf(this[i]) == -1) {
+           newData.favourites.push(favourite)
+         }
+
+      }
+
 
       console.log(result)
       res.render('userProfile', newData)
